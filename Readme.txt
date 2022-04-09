@@ -7,6 +7,9 @@
     - Eunbin Cha(B00811825)
     - Hana Park(B00875008)
     - Mike Hsin(B00789703)
+    
+* Project Repository: https://github.com/michaelsonH-ITDA/csci4144Project
+
 # Dal email: 
     - Eunbin Cha(en598039@dal.ca)
     - Hana Park(hn946002@dal.ca)

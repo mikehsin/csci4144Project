@@ -12,7 +12,7 @@ def readInputFile(num):
     return pd.read_csv("Market_Basket_Optimisation.csv") if num == 1 else pd.read_csv("all_seasons.csv")
 
 
-# Gather All Items of Each Transactions into Numpy Array
+# Transform all item of every transactions into the Numpy Array
 def getTransaction(transaction, dataset):
     for i in range(0, dataset.shape[0]):
         for j in range(0, dataset.shape[1]):
@@ -62,7 +62,7 @@ def FP_Growth(dataset, min_sup):
     return fpgrowth(dataset, min_sup, use_colnames=True)
 
 def main():
-    # Gather All Items of Each Transactions into Numpy Array
+    # Transform all item of every transactions into the Numpy Array
     transaction = []
     min_sup = 0.05
 

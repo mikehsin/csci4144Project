@@ -3,20 +3,19 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 
+from itertools import product
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import fpgrowth
 from mlxtend.frequent_patterns import association_rules
 
 def readInputFile(num):
     # dataset [1] & [2]
-    return pd.read_csv("Market_Basket_Optimisation.csv") if num == 1 else pd.read_csv("all_seasons.csv")
-
+    return pd.read_csv("Market_Basket_Optimisation.csv") if num == "1" else pd.read_csv("all_seasons.csv")
 
 # Transform all item of every transactions into the Numpy Array
 def getTransaction(transaction, dataset):
-    for i in range(0, dataset.shape[0]):
-        for j in range(0, dataset.shape[1]):
-            transaction.append(dataset.values[i,j])
+    for i, j in product(range(0, dataset.shape[0]), range(0, dataset.shape[1])):
+        transaction.append(dataset.values[i,j])
     return np.array(transaction)
 
 def getPandasDataFrame(transaction):
@@ -24,7 +23,7 @@ def getPandasDataFrame(transaction):
 
 #  Getting rid of reduncdent data
 def cleaning(fileNum, df):
-    if fileNum == 1:
+    if fileNum == "1":
         indexNames = df[df['items'] == "nan" ].index
     else:
         indexNames = df[df['items'] == "None" ].index
@@ -38,9 +37,10 @@ def getViz(df_table, num):
     df_table["all"] = "Top 50 items" if num == 1 else "Top 50 Universities of producing NBA players"
 
     # creating tree map using plotly
-    return px.treemap(df_table.head(50), path=['all', "items"], values='incident_count',
-                    color=df_table["incident_count"].head(50), hover_data=['items'],
-                    color_continuous_scale='reds',)
+    return px.treemap(df_table.head(30), path=['all', "items"], values='incident_count',
+                    color=df_table["incident_count"].head(30), hover_data=['items'],
+                    color_continuous_scale='reds')
+    # data viz ploty express from https://plotly.com/python/plotly-express/
 
 # Create the numpy array of the transactions
 def getNumpyArrayTransaction(dataset, transaction):
@@ -51,9 +51,7 @@ def getNumpyArrayTransaction(dataset, transaction):
 
 def getTransactionEncoder(transaction):
     transaction_encoder = TransactionEncoder()
-    te_ary = transaction_encoder.fit(transaction).transform(transaction)
-    return pd.DataFrame(te_ary, columns=transaction_encoder.columns_)
-
+    return pd.DataFrame(transaction_encoder.fit(transaction).transform(transaction), columns=transaction_encoder.columns_)
 
 def getTop30(table):
     return table["items"].head(30).values
@@ -108,7 +106,16 @@ def main():
     dataset = dataset.loc[:,top30]
 
     # Run the fpgrowth algorithm and print out the result
-    print(FP_Growth(dataset, min_sup))
+    result = FP_Growth(dataset, min_sup)
+    print(result)
+
+    print(result.head(10))
+
+    # Create the asssociation rules and print it out by sorting it based on confidence
+    result=association_rules(result, metric="lift", min_threshold=1)
+    print(result.sort_values("confidence",ascending=False))
+
+    print("\n####################################Program Ends#####################################\n")
 
 if __name__ == '__main__':
     main()

@@ -43,4 +43,7 @@ Available: https://towardsdatascience.com/fp-growth-frequent-pattern-generation-
 “Algorithms for frequent itemset mining: A literature review,” 
 Artificial Intelligence Review, vol. 52, no. 4, pp. 2603–2621, 2018. 
 
+[6] “Plotly,” Plotly express with Python. [Online]. 
+Available: https://plotly.com/python/plotly-express/. [Accessed: 10-Apr-2022]. 
+
 ##########################################################################

@@ -26,6 +26,7 @@ pip install plotly
 pip install mlxtend
 
 You can run "pip freeze > requirements.txt" to check availaable python libraries on your machine
+*** Please note that some libraries may not availaable on Timberlea server due to permission issue
 
 Run command: python FP-Growth.py
 

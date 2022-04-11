@@ -1,7 +1,8 @@
 # importing required module
 import pandas as pd
 import numpy as np
-import plotly.express as px
+import plotly.express as px 
+# No availble on timberlea
 
 from itertools import product
 from mlxtend.preprocessing import TransactionEncoder

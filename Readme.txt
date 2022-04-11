@@ -19,6 +19,14 @@
 
 *** Please check the prior python version first, run "alias python=python3" if python 2 is being selected. ***
 
+-----------Please install the following libraries before you run the program!!!!!!-----------------
+pip install pandas
+pip install numpy
+pip install plotly
+pip install mlxtend
+
+You can run "pip freeze > requirements.txt" to check availaable python libraries on your machine
+
 Run command: python FP-Growth.py
 
 Note: you must enter the name correctly.
